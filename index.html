@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuel Up Nutrition</title>
+<meta name="description" content="Fuel Up Nutrition — Emmanuel Vázquez Aguirre, nutrición deportiva y clínica en Nicolás Romero, Estado de México, y consulta en línea.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+<style>
+/* VOICE: directo, deportivo, profesional; frases cortas, cero promesas.
+   IDEA: la etiqueta de información nutricional de un suplemento deportivo — reglas gruesas, datos claros.
+   PICTURE: retrato grande de Emmanuel que rompe el titular y baja hasta la siguiente banda.
+   COLOUR and TYPE: azul real dominante, blanco de soporte, amarillo señal como acento; Archivo condensada 800 + Archivo.
+   LAYOUT: bandas a todo lo ancho, rejillas asimétricas, esquinas rectas, una sola animación (cinta amarilla). */
+:root{color-scheme:light dark;
+  --blue:#1238E6;--deep:#071A6B;--yellow:#FFD200;--black:#0A0F1F;
+  --bg:light-dark(#FFFFFF,#060C24);--ink:light-dark(#0A0F1F,#EEF1FA);--soft:light-dark(#F2F4FA,#0C1536);--line:light-dark(#0A0F1F,#EEF1FA);--mute:light-dark(#4A5270,#A9B1CC)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;padding-top:76px;background:var(--bg);color:var(--ink);font:16.5px/1.6 "Archivo","Helvetica Neue",Arial,sans-serif;font-variation-settings:"wdth" 100;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(5vw,18px)}
+.band{padding:clamp(64px,9vw,128px) 0}
+.d{font-family:"Archivo","Arial Narrow","Roboto Condensed",sans-serif;font-weight:850;font-stretch:72%;font-variation-settings:"wdth" 72;line-height:.92;letter-spacing:-.01em;text-transform:uppercase;margin:0}
+h2.d{font-size:clamp(38px,5.4vw,76px);text-wrap:balance}
+h3{margin:0}
+.kick{font-weight:600;font-size:15px;display:flex;gap:10px;align-items:center;margin:0 0 22px}
+.kick::before{content:"";width:28px;height:4px;background:var(--yellow);flex:none}
+.lead{font-size:clamp(17px,1.5vw,19px);max-width:56ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;font-weight:700;font-size:16px;text-decoration:none;border:2px solid currentColor;transition:transform .2s,background .2s,color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible,a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.btn-y{background:var(--yellow);color:var(--black);border-color:var(--yellow)}
+.btn-k{background:var(--black);color:#fff;border-color:var(--black)}
+.arrow{width:18px;height:18px;flex:none}
+
+/* Navegación */
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--blue);color:#fff;transition:box-shadow .2s}
+.nav.scrolled{box-shadow:0 1px 0 rgba(255,255,255,.18),0 10px 30px rgba(4,12,50,.25)}
+.nav .wrap{display:flex;align-items:center;gap:28px;min-height:76px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+.logo img{width:56px;height:56px;flex:none;border-radius:50%;background:#fff;object-fit:contain;padding:3px}
+.logo b{font-weight:900;font-stretch:70%;font-variation-settings:"wdth" 70;font-size:26px;line-height:.85;letter-spacing:.01em}
+.logo small{display:block;font-weight:600;font-size:11px;letter-spacing:.32em;line-height:1.4}
+.menu{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+.menu a{text-decoration:none;font-weight:600;font-size:15px;padding:8px 0;border-bottom:2px solid transparent}
+.menu a:hover{border-color:var(--yellow)}
+.nav .btn{min-height:44px;padding:0 18px;font-size:15px}
+.burger{display:none;background:none;border:0;color:#fff;width:48px;height:48px;padding:12px;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;position:relative;z-index:80}
+.burger span{display:block;height:2px;background:currentColor;margin:6px 0;transition:transform .2s,opacity .2s}
+@media(max-width:960px){
+  .burger{display:block}.nav .btn{display:none}
+  .menu{position:fixed;top:76px;left:0;right:0;bottom:0;background:var(--deep);flex-direction:column;gap:0;padding:8px max(5vw,18px) calc(32px + env(safe-area-inset-bottom));display:none;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;z-index:70}
+  .menu.open{display:flex}
+  html.lock{overflow:hidden}
+  html.lock .wa-bar{display:none}
+  .burger[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  .burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+  .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}.menu a{display:block;padding:14px 0;font-size:20px;border-bottom:1px solid rgba(255,255,255,.15)}
+  .menu li:last-child a{color:var(--yellow)}
+}
+@media(min-width:961px){.menu li:last-child{display:none}}
+
+/* Hero */
+.hero{background:var(--blue);color:#fff;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:0;align-items:end;padding-top:clamp(36px,6vw,72px)}
+.hero h1{font-size:clamp(50px,8.6vw,132px);position:relative;z-index:3;margin-right:-22%}
+.hero h1 span{display:block}
+.hero h1 .out{color:transparent;-webkit-text-stroke:2px #fff}
+.hero-copy{position:relative;z-index:3;padding-bottom:clamp(40px,6vw,80px)}
+.hero-copy p{max-width:46ch;font-size:clamp(17px,1.5vw,19px);margin:28px 0 32px;color:#E4E9FF}
+.hero-copy .who{display:block;font-weight:700;color:#fff}
+.ctas{display:flex;flex-wrap:wrap;gap:14px}
+.hero-pic{position:relative;align-self:stretch;min-height:clamp(420px,62vw,720px)}
+.hero-pic .ph{position:absolute;right:6%;bottom:0;width:min(86%,440px);aspect-ratio:270/332;background-position:center top;box-shadow:14px 14px 0 var(--black)}
+.hero-pic::before{content:"";position:absolute;right:-8%;bottom:0;width:78%;height:72%;background:var(--yellow);z-index:0}
+.tag{position:absolute;z-index:4;left:-6%;bottom:36px;background:#fff;color:var(--black);padding:14px 18px;font-size:14px;line-height:1.35;max-width:230px;box-shadow:8px 8px 0 var(--black)}
+.tag b{display:block;font-size:16px}
+.tape{background:var(--yellow);color:var(--black);overflow:hidden;white-space:nowrap;border-top:3px solid var(--black);border-bottom:3px solid var(--black);position:relative;z-index:5}
+.tape div{display:inline-flex;gap:38px;padding:14px 0;animation:roll 42s linear infinite;font-weight:850;font-stretch:72%;font-variation-settings:"wdth" 72;text-transform:uppercase;font-size:22px}
+.tape span{display:inline-flex;align-items:center;gap:38px}
+.tape span::after{content:"";width:10px;height:10px;background:var(--blue);transform:rotate(45deg)}
+@keyframes roll{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.tape div{animation:none}.btn{transition:none}html{scroll-behavior:auto}}
+
+/* Fotos: se ven como marcador hasta que existan los archivos en /img */
+.ph{background:var(--img) center/cover no-repeat,repeating-linear-gradient(135deg,#0B2BC2 0 14px,#08209A 14px 28px);position:relative;z-index:1}
+.ph.light{background:var(--img) center/cover no-repeat,repeating-linear-gradient(135deg,#E3E8F7 0 14px,#D8DEF1 14px 28px)}
+.ph .lbl{position:absolute;left:16px;bottom:16px;right:16px;font-size:13px;line-height:1.4;color:#fff;background:rgba(7,26,107,.85);padding:10px 12px;max-width:280px}
+.ph.has-img .lbl{display:none}
+
+/* Sobre mí */
+.about .grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(32px,6vw,96px);align-items:start}
+.badgebox{background:var(--blue);color:#fff;aspect-ratio:4/5;margin-top:clamp(0px,6vw,90px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:32px;position:relative;box-shadow:14px 14px 0 var(--yellow)}
+.disc{width:min(72%,300px);aspect-ratio:1;border-radius:50%;background:#fff;display:grid;place-items:center;padding:7%}
+.disc img{width:100%;height:auto}
+.hash{margin:0;font-weight:900;font-stretch:72%;font-variation-settings:"wdth" 72;font-size:clamp(34px,4vw,52px);line-height:1;color:var(--yellow)}
+.cap{margin:0;font-size:14px;color:#D3DBFF;text-align:center;max-width:30ch}
+.about h2{margin-bottom:28px}
+.about p{max-width:60ch}
+.quote{margin:36px 0;padding:0 0 0 22px;border-left:6px solid var(--yellow);font-size:clamp(21px,2.2vw,27px);line-height:1.3;font-weight:600;max-width:30ch}
+.facts{border:3px solid var(--line);padding:16px 20px 12px;margin-top:40px;max-width:560px;background:var(--bg)}
+.facts h3{font-weight:900;font-stretch:72%;font-variation-settings:"wdth" 72;font-size:34px;text-transform:uppercase;line-height:1;padding-bottom:6px;border-bottom:10px solid var(--line)}
+.facts .sub{font-size:14px;padding:8px 0;border-bottom:5px solid var(--line);font-weight:600}
+.facts dl{margin:0}
+.facts .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.facts .row:last-child{border-bottom:0}
+.facts dt{font-weight:700}.facts dd{margin:0;color:var(--mute);font-size:15px;text-align:right}
+.facts dd{max-width:30ch}
+
+/* Modalidades */
+.mods{background:var(--soft)}
+.mods-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:24px;margin-bottom:48px}
+.mods-head p{max-width:42ch;margin:0;color:var(--mute)}
+.mgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);grid-template-rows:auto auto;gap:20px}
+.mod{padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:18px;position:relative}
+.mod h3{font-weight:900;font-stretch:72%;font-variation-settings:"wdth" 72;text-transform:uppercase;font-size:clamp(30px,3.4vw,46px);line-height:.95}
+.mod p{margin:0}
+.mod ul{list-style:none;margin:0;padding:0}
+.mod li{padding:10px 0;border-top:1px solid currentColor;display:flex;gap:12px;font-size:15.5px}
+.mod li:last-child{border-bottom:1px solid currentColor}
+.mod li::before{content:"";width:8px;height:8px;margin-top:9px;flex:none;background:currentColor}
+.mod .btn{margin-top:auto;align-self:flex-start}
+.m-basic{background:var(--bg);border:3px solid var(--line)}
+.m-basic .tagline{font-weight:700;font-size:14px;padding-bottom:10px;border-bottom:8px solid var(--line)}
+.m-sport{background:var(--blue);color:#fff;grid-row:span 2;padding:clamp(28px,4vw,56px)}
+.m-sport h3{font-size:clamp(40px,4.6vw,68px);max-width:12ch}
+.m-sport .badge{position:absolute;top:0;right:0;background:var(--yellow);color:var(--black);font-weight:800;font-size:14px;padding:10px 16px}
+.m-sport li{border-color:rgba(255,255,255,.35)}
+.m-sport li::before{background:var(--yellow)}
+.m-sport .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+.m-sport .ph{aspect-ratio:3/4}
+.m-online{background:var(--yellow);color:var(--black)}
+.m-online .screen{border:3px solid var(--black);padding:16px 16px 14px;position:relative;margin-top:4px;background:#fff}
+.m-online .screen::after{content:"";position:absolute;left:50%;bottom:-17px;width:60px;height:14px;transform:translateX(-50%);background:var(--black)}
+.m-online .dot{display:inline-block;width:10px;height:10px;background:#E8343B;border-radius:50%;margin-right:8px;vertical-align:1px}
+.m-online .screen p{font-weight:700}
+.m-online ul{margin-top:12px}
+@media(max-width:900px){.mgrid{grid-template-columns:minmax(0,1fr)}.m-sport{grid-row:auto;order:-1}}
+@media(max-width:560px){.m-sport .split{grid-template-columns:minmax(0,1fr)}.m-sport .ph{aspect-ratio:4/3}}
+
+/* Especialidades */
+.spec .top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:end;margin-bottom:48px}
+.spec .top p{margin:0;color:var(--mute);max-width:48ch}
+.slist{border-top:3px solid var(--line)}
+.sitem{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr) auto;gap:28px;align-items:center;padding:clamp(22px,3vw,34px) 0;border-bottom:1px solid var(--line);position:relative}
+.sitem h3{font-weight:850;font-stretch:72%;font-variation-settings:"wdth" 72;text-transform:uppercase;font-size:clamp(28px,3.6vw,50px);line-height:.95;transition:color .2s}
+.sitem p{margin:0;color:var(--mute)}
+.sitem .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;max-width:260px}
+.chips span{font-size:13px;font-weight:600;border:1.5px solid var(--line);padding:4px 10px;white-space:nowrap}
+.sitem::before{content:"";position:absolute;left:0;bottom:-1px;height:4px;width:0;background:var(--yellow);transition:width .35s}
+.sitem:hover::before{width:100%}
+.sitem:hover h3{color:var(--blue)}
+@media(max-width:860px){.spec .top{grid-template-columns:minmax(0,1fr)}.sitem{grid-template-columns:minmax(0,1fr)}.sitem .chips{justify-content:flex-start;max-width:none}}
+
+/* Proceso */
+.proc{background:var(--deep);color:#fff}
+.proc .grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,96px)}
+.steps{display:grid;gap:0}
+.step{display:grid;grid-template-columns:120px minmax(0,1fr);gap:24px;padding:26px 0;border-top:1px solid rgba(255,255,255,.25)}
+.step:last-child{border-bottom:1px solid rgba(255,255,255,.25)}
+.step b{color:var(--yellow);font-weight:800;font-size:15px;padding-top:4px}
+.step h3{font-size:22px;font-weight:700;margin-bottom:6px}
+.step p{margin:0;color:#C9D2F5}
+.proc .lead{color:#C9D2F5}
+@media(max-width:860px){.proc .grid{grid-template-columns:minmax(0,1fr)}.step{grid-template-columns:minmax(0,1fr);gap:6px}}
+
+/* Contacto */
+.contact{background:var(--yellow);color:var(--black)}
+.contact .grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,5vw,80px);align-items:start}
+.contact h2{font-size:clamp(44px,6.4vw,96px);margin-bottom:26px}
+.info{display:grid;gap:0;margin:34px 0;border-top:3px solid var(--black)}
+.info div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:16px;padding:14px 0;border-bottom:1px solid var(--black)}
+.info dt{font-weight:800}.info dd{margin:0}
+.info a{font-weight:700}
+.form{background:var(--black);color:#fff;padding:clamp(24px,3.4vw,44px)}
+.form h3{font-weight:900;font-stretch:72%;font-variation-settings:"wdth" 72;text-transform:uppercase;font-size:34px;line-height:1;margin-bottom:8px}
+.form>p{color:#B9C0D6;margin:0 0 22px;font-size:15px}
+.form label{display:block;font-weight:700;font-size:14px;margin:16px 0 6px}
+.form input,.form select,.form textarea{width:100%;font:inherit;font-size:16px;color:#fff;background:transparent;border:0;border-bottom:2px solid #59607A;padding:10px 0;border-radius:0}
+.form select option{color:#000}
+.form textarea{resize:vertical;min-height:84px}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:var(--yellow);outline:none}
+.form .btn{width:100%;margin-top:26px}
+.form .note{font-size:13px;color:#99A1BB;margin-top:12px}
+@media(max-width:900px){.contact .grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:480px){.info div{grid-template-columns:minmax(0,1fr);gap:2px}}
+
+/* Footer */
+footer{background:var(--blue);color:#fff;padding:56px 0 28px}
+footer .wrap>div:first-child{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px;align-items:flex-start;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.3)}
+footer .big{display:block;width:100%;height:auto;margin:40px 0 0;overflow:visible}
+footer .big text{font-family:"Archivo","Arial Narrow",sans-serif;font-weight:900;font-stretch:70%;font-variation-settings:"wdth" 70;font-size:150px;fill:none;stroke:rgba(255,255,255,.55);stroke-width:2px;vector-effect:non-scaling-stroke}
+footer nav{display:flex;flex-wrap:wrap;gap:12px 28px}
+footer nav a{text-decoration:none;font-weight:600}
+footer nav a:hover{color:var(--yellow)}
+.legal{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:22px;font-size:13.5px;color:#D3DBFF}
+
+/* Hero en pantallas pequeñas */
+@media(max-width:860px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr)}
+  .hero h1{margin-right:0}
+  .hero-copy{padding-bottom:28px}
+  .hero-pic{min-height:440px;margin:0 calc(-1*max(5vw,18px))}
+  .hero-pic .ph{right:max(5vw,18px);width:min(78%,360px)}
+  .hero-pic{min-height:auto;aspect-ratio:1/1.05}
+  .tag{left:max(5vw,18px);bottom:28px}
+  .about .grid{grid-template-columns:minmax(0,1fr)}
+  .badgebox{margin-top:0;aspect-ratio:auto;padding:44px 24px}
+}
+@media(max-width:600px){.tape div{font-size:18px}.facts h3{font-size:28px}.mods-head{margin-bottom:32px}}
+
+/* Ajustes de celular */
+.disc{overflow:hidden}
+.m-sport .ph:not(.has-img){display:none}
+.m-sport .split:has(.ph:not(.has-img)){grid-template-columns:minmax(0,1fr)}
+.wa-bar{display:none}
+@media(max-width:760px){
+  .wa-bar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--black);transform:translateY(110%);transition:transform .25s}
+  .wa-bar.show{transform:none}
+  .wa-bar a{flex:1;min-height:48px;padding:0 12px;font-size:15px}
+  body{padding-bottom:72px}
+  .m-sport .badge{position:static;align-self:flex-start;margin:calc(-1*clamp(28px,4vw,56px)) 0 4px calc(-1*clamp(28px,4vw,56px))}
+}
+@media(max-width:600px){
+  .facts .row{grid-template-columns:minmax(0,1fr);gap:2px}
+  .facts dd{text-align:left;max-width:none}
+  .kick{margin-bottom:18px;font-size:14px}
+  .ctas .btn{flex:1 1 100%}
+  .contact .btn-k{width:100%}
+  .hero h1 .out{-webkit-text-stroke-width:1.5px}
+  .mod{padding:24px 20px}
+  .m-sport{padding:28px 20px}
+  .m-sport .badge{margin:-28px 0 4px -20px}
+  .step{padding:20px 0}
+  .tag{max-width:200px;padding:10px 14px;font-size:13px;box-shadow:6px 6px 0 var(--black)}
+  .tag b{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){.wa-bar{transition:none}}
+
+/* Pantallas grandes */
+@media(min-width:1600px){
+  .wrap{max-width:1440px}
+  body{font-size:17.5px}
+  .hero h1{font-size:clamp(50px,8vw,150px)}
+  .hero-pic .ph{width:min(86%,500px)}
+  .hero-copy p,.lead{font-size:20px}
+}
+@media(min-width:2100px){
+  .wrap{max-width:1780px}
+  body{font-size:20px}
+  .nav .wrap{min-height:96px}
+  body{padding-top:96px}
+  .logo img{width:70px;height:70px}
+  .logo b{font-size:32px}.logo small{font-size:13px}
+  .menu{gap:36px}.menu a{font-size:18px}
+  .btn{min-height:62px;padding:0 32px;font-size:19px}
+  .nav .btn{min-height:54px;font-size:18px}
+  .menu{top:96px}
+  html{scroll-padding-top:100px}
+  .kick{font-size:18px}.kick::before{width:36px;height:5px}
+  .hero h1{font-size:clamp(50px,7.6vw,200px)}
+  .hero-copy p,.lead{font-size:23px}
+  .hero-pic .ph{width:min(86%,580px)}
+  .tag{max-width:290px;font-size:17px;padding:18px 22px}.tag b{font-size:19px}
+  .tape div{font-size:28px;padding:18px 0}
+  h2.d{font-size:clamp(38px,4.6vw,112px)}
+  .contact h2{font-size:clamp(44px,5.6vw,140px)}
+  .quote{font-size:34px}
+  .facts{max-width:700px}.facts h3{font-size:44px}.facts .sub,.facts dd{font-size:17px}
+  .mod h3{font-size:58px}.m-sport h3{font-size:92px}.mod li{font-size:18px}
+  .m-sport .badge,.m-basic .tagline{font-size:16px}
+  .sitem h3{font-size:64px}.chips span{font-size:15px}.sitem .chips{max-width:340px}
+  .step{grid-template-columns:150px minmax(0,1fr)}.step h3{font-size:27px}.step b{font-size:17px}
+  .form h3{font-size:44px}.form label{font-size:16px}.form input,.form select,.form textarea{font-size:19px}.form>p,.form .note{font-size:16px}
+  .info div{grid-template-columns:170px minmax(0,1fr)}
+  .legal{font-size:16px}
+  .cap{font-size:17px}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Fuel Up Nutrition, inicio">
+      <img src="img/logo.png" alt="" width="56" height="56">
+      <span><b>FUEL UP</b><small>NUTRITION</small></span>
+    </a>
+    <ul class="menu" id="menu">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#especialidades">Especialidades</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a href="#contacto">Agendar consulta</a></li>
+    </ul>
+    <a class="btn btn-y" href="#contacto">Agendar consulta</a>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="kick" style="margin:0 0 26px">Nutrición deportiva y clínica</p>
+      <h1 class="d"><span>Combustible</span><span class="out">para</span><span>rendir.</span></h1>
+      <p><span class="who">Emmanuel Vázquez Aguirre, nutriólogo.</span>Planes de alimentación hechos para tu entrenamiento, tu salud y tu rutina real. Consulta presencial en Nicolás Romero o en línea desde cualquier lugar.</p>
+      <div class="ctas">
+        <a class="btn btn-y" href="#contacto">Agendar consulta
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn" href="#servicios">Conocer servicios</a>
+      </div>
+    </div>
+    <div class="hero-pic">
+      <div class="ph" data-img="img/emmanuel-hero.jpg" role="img" aria-label="Emmanuel Vázquez Aguirre, nutriólogo de Fuel Up Nutrition">
+        <span class="lbl">Foto principal de Emmanuel, vertical, de cuerpo medio, fondo recortado o liso · img/emmanuel-hero.jpg</span>
+      </div>
+      <div class="tag"><b>Consulta presencial y en línea</b>Los Manantiales, Nicolás Romero, Edo. Méx.</div>
+    </div>
+  </div>
+  <div class="tape" aria-hidden="true"><div id="tape"></div></div>
+</section>
+
+<section class="band about" id="sobre-mi">
+  <div class="wrap grid">
+    <div class="badgebox">
+      <div class="disc"><img src="img/logo.png" alt="Logotipo de Fuel Up Nutrition" width="300" height="300"></div>
+      <p class="hash">#FuelUP</p>
+      <p class="cap">Nutrición deportiva y clínica · Nicolás Romero, Edo. Méx. y en línea</p>
+    </div>
+    <div>
+      <p class="kick">Sobre mí</p>
+      <h2 class="d">Nutrición que se adapta a ti, no al revés.</h2>
+      <p>Soy Emmanuel Vázquez Aguirre, nutriólogo enfocado en nutrición deportiva y clínica. Trabajo con personas que entrenan y quieren rendir mejor, y con pacientes que necesitan cuidar su salud a través de la alimentación.</p>
+      <p>En cada consulta parto de tus datos y de tu día a día: qué comes, a qué hora entrenas, cuánto duermes y qué te funciona. Con eso diseñamos un plan que puedas sostener, y lo ajustamos según tu progreso.</p>
+      <p class="quote">La comida es el combustible de todo lo que haces. Por eso se llama Fuel Up.</p>
+      <div class="facts" aria-label="Enfoque de Fuel Up Nutrition">
+        <h3>Enfoque Fuel Up</h3>
+        <div class="sub">Lo que incluye cada proceso</div>
+        <dl>
+          <div class="row"><dt>Valoración</dt><dd>Mediciones y composición corporal</dd></div>
+          <div class="row"><dt>Contexto</dt><dd>Historia clínica, hábitos y horarios</dd></div>
+          <div class="row"><dt>Plan</dt><dd>Personalizado, sin dietas genéricas</dd></div>
+          <div class="row"><dt>Seguimiento</dt><dd>Ajustes según tu progreso</dd></div>
+          <div class="row"><dt>Educación</dt><dd>Entender por qué comes lo que comes</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band mods" id="servicios">
+  <div class="wrap">
+    <div class="mods-head">
+      <div><p class="kick">Modalidades de consulta</p><h2 class="d">Elige cómo empezar.</h2></div>
+      <p>Tres formas de trabajar juntos. Si no sabes cuál es para ti, escríbeme y lo definimos según tu objetivo.</p>
+    </div>
+    <div class="mgrid">
+      <article class="mod m-sport">
+        <span class="badge">Para quien entrena</span>
+        <h3>Presencial deportiva</h3>
+        <div class="split">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <p>Para atletas y personas que entrenan con un objetivo: competir, ganar masa muscular o bajar grasa sin perder rendimiento.</p>
+            <ul>
+              <li>Valoración de composición corporal</li>
+              <li>Plan según tu disciplina, cargas y horarios</li>
+              <li>Alimentación antes, durante y después de entrenar</li>
+              <li>Estrategia para días de competencia</li>
+            </ul>
+          </div>
+          <div class="ph" data-img="img/emmanuel-deportiva.jpg" role="img" aria-label="Emmanuel en un contexto deportivo">
+            <span class="lbl">Emmanuel con un atleta o en gimnasio · img/emmanuel-deportiva.jpg</span>
+          </div>
+        </div>
+        <a class="btn btn-y wa" data-m="consulta presencial deportiva" href="#">Agendar consulta deportiva
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </article>
+
+      <article class="mod m-basic">
+        <div class="tagline">Presencial · Nicolás Romero</div>
+        <h3>Presencial básica</h3>
+        <p>Para mejorar tu alimentación, controlar tu peso o atender una condición de salud con un plan claro y realista.</p>
+        <ul>
+          <li>Valoración y mediciones</li>
+          <li>Revisión de hábitos e historia clínica</li>
+          <li>Plan de alimentación personalizado</li>
+        </ul>
+        <a class="btn btn-k wa" data-m="consulta presencial básica" href="#">Agendar consulta básica</a>
+      </article>
+
+      <article class="mod m-online">
+        <h3>Consulta en línea</h3>
+        <div class="screen"><p><span class="dot"></span>Videollamada desde donde estés</p>
+          <ul>
+            <li>Misma atención que en consultorio</li>
+            <li>Plan digital y seguimiento a distancia</li>
+          </ul>
+        </div>
+        <p style="margin-top:12px">Ideal si vives lejos, viajas o tus horarios no te permiten llegar al consultorio.</p>
+        <a class="btn btn-k wa" data-m="consulta en línea" href="#">Agendar consulta en línea</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band spec" id="especialidades">
+  <div class="wrap">
+    <div class="top">
+      <div><p class="kick">Especialidades</p><h2 class="d">En qué te puedo ayudar.</h2></div>
+      <p>Cada plan parte de un objetivo concreto. Estas son las áreas en las que trabajo con mayor frecuencia.</p>
+    </div>
+    <div class="slist" id="slist"></div>
+  </div>
+</section>
+
+<section class="band proc">
+  <div class="wrap grid">
+    <div>
+      <p class="kick">Tu primera consulta</p>
+      <h2 class="d">Así empezamos.</h2>
+      <p class="lead" style="margin-top:24px">Sin fórmulas mágicas ni planes copiados. Un proceso ordenado para que sepas qué esperar desde el primer día.</p>
+    </div>
+    <div class="steps" id="steps"></div>
+  </div>
+</section>
+
+<section class="band contact" id="contacto">
+  <div class="wrap grid">
+    <div>
+      <p class="kick" style="--yellow:#0A0F1F">Contacto</p>
+      <h2 class="d">Agenda tu consulta.</h2>
+      <p class="lead">Escríbeme por WhatsApp para conocer horarios disponibles, costos y la modalidad que mejor se adapta a ti.</p>
+      <dl class="info">
+        <div><dt>WhatsApp</dt><dd><a href="https://wa.me/525537019538">+52 55 3701 9538</a></dd></div>
+        <div><dt>Consultorio</dt><dd>Lago Alberto 5, MZ 004, Los Manantiales, Nicolás Romero, Estado de México · <a href="https://www.google.com/maps/search/?api=1&query=Lago%20Alberto%205%2C%20Los%20Manantiales%2C%20Nicol%C3%A1s%20Romero%2C%20Estado%20de%20M%C3%A9xico">Ver en Google Maps</a></dd></div>
+        <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/fuelup_nutrition_/">@fuelup_nutrition_</a></dd></div>
+        <div><dt>En línea</dt><dd>Consulta por videollamada desde cualquier lugar</dd></div>
+      </dl>
+      <a class="btn btn-k" href="https://wa.me/525537019538">Escribir por WhatsApp</a>
+    </div>
+    <form class="form" id="form" novalidate>
+      <h3>Prepara tu mensaje</h3>
+      <p>Llena estos datos y se abrirá WhatsApp con tu mensaje listo para enviar.</p>
+      <label for="f-name">Nombre</label>
+      <input id="f-name" name="name" autocomplete="name" placeholder="Tu nombre">
+      <label for="f-mod">Modalidad</label>
+      <select id="f-mod" name="mod">
+        <option>Consulta presencial básica</option>
+        <option>Consulta presencial deportiva</option>
+        <option>Consulta en línea</option>
+        <option>Aún no lo sé</option>
+      </select>
+      <label for="f-goal">¿Cuál es tu objetivo?</label>
+      <textarea id="f-goal" name="goal" placeholder="Ej. Entreno crossfit y quiero mejorar mi recuperación"></textarea>
+      <a class="btn btn-y" id="f-send" href="https://wa.me/525537019538">Abrir WhatsApp
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <p class="note">Tus datos no se guardan en este sitio; solo se usan para escribir el mensaje.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="logo" href="#inicio" aria-label="Fuel Up Nutrition, inicio">
+        <img src="img/logo.png" alt="" width="56" height="56">
+        <span><b>FUEL UP</b><small>NUTRITION</small></span>
+      </a>
+      <nav aria-label="Pie de página">
+        <a href="#sobre-mi">Sobre mí</a><a href="#servicios">Servicios</a><a href="#especialidades">Especialidades</a><a href="#contacto">Contacto</a><a href="https://www.instagram.com/fuelup_nutrition_/">Instagram</a>
+      </nav>
+    </div>
+    <svg class="big" viewBox="0 0 1000 124" aria-hidden="true" preserveAspectRatio="xMinYMid meet"><text x="2" y="118" textLength="996" lengthAdjust="spacingAndGlyphs">FUEL UP NUTRITION</text></svg>
+    <div class="legal">
+      <span>© <span id="yr">2026</span> Fuel Up Nutrition · Emmanuel Vázquez Aguirre</span>
+      <span>Diseño y desarrollo: MSTech Digital</span>
+    </div>
+  </div>
+</footer>
+
+<div class="wa-bar" id="wabar">
+  <a class="btn btn-y" href="https://wa.me/525537019538">Agendar por WhatsApp</a>
+</div>
+
+<script>
+{
+  const WA = "525537019538";
+  const wa = t => "https://wa.me/" + WA + "?text=" + encodeURIComponent(t);
+
+  const tape = ["Nutrición deportiva","Nutrición clínica","Composición corporal","Rendimiento","Consulta en línea","Nicolás Romero, Edo. Méx."];
+  const seq = tape.map(t => `<span>${t}</span>`).join("");
+  document.getElementById("tape").innerHTML = seq + seq + seq + seq;
+
+  const specs = [
+    ["Rendimiento deportivo","Alimentación ajustada a tu disciplina, volumen de entrenamiento y calendario de competencias.",["Fuerza","Resistencia","Deportes de equipo"]],
+    ["Composición corporal","Pérdida de grasa y ganancia de masa muscular con mediciones que muestran tu avance real.",["Pérdida de grasa","Masa muscular"]],
+    ["Nutrición clínica","Plan de alimentación como apoyo en el control de condiciones de salud, en coordinación con tu médico.",["Diabetes","Hipertensión","Colesterol"]],
+    ["Hábitos y salud","Para quien quiere comer mejor, tener más energía y construir hábitos que duren.",["Educación alimentaria","Control de peso"]]
+  ];
+  document.getElementById("slist").innerHTML = specs.map(([t,d,c]) =>
+    `<div class="sitem"><h3>${t}</h3><p>${d}</p><div class="chips">${c.map(x=>`<span>${x}</span>`).join("")}</div></div>`).join("");
+
+  const steps = [
+    ["Antes","Escríbeme","Por WhatsApp elegimos modalidad, día y hora, y te comparto lo que necesitas llevar o tener a la mano."],
+    ["Primera cita","Valoración","Revisamos tu historia clínica, hábitos, entrenamiento y objetivo, y tomamos tus mediciones."],
+    ["Después","Tu plan","Recibes un plan de alimentación personalizado y te explico cómo aplicarlo en tu día a día."],
+    ["Seguimiento","Ajustes","En cada cita revisamos tu progreso y ajustamos el plan según tus resultados y tu rutina."]
+  ];
+  document.getElementById("steps").innerHTML = steps.map(([w,t,d]) =>
+    `<div class="step"><b>${w}</b><div><h3>${t}</h3><p>${d}</p></div></div>`).join("");
+
+  for (const a of document.querySelectorAll("a.wa"))
+    a.href = wa(`Hola Emmanuel, me gustaría agendar una ${a.dataset.m}. ¿Qué horarios tienes disponibles?`);
+
+  const form = document.getElementById("form"), send = document.getElementById("f-send");
+  const build = () => {
+    const n = form.name.value.trim(), m = form.mod.value, g = form.goal.value.trim();
+    let t = `Hola Emmanuel${n ? ", soy " + n : ""}. Me interesa: ${m}.`;
+    if (g) t += ` Mi objetivo: ${g}.`;
+    t += " ¿Qué horarios tienes disponibles?";
+    send.href = wa(t);
+  };
+  form.addEventListener("input", build); form.addEventListener("change", build);
+  form.addEventListener("submit", e => e.preventDefault()); build();
+
+  for (const el of document.querySelectorAll(".ph[data-img]")) {
+    const src = el.dataset.img, im = new Image();
+    im.onload = () => { el.style.setProperty("--img", `url("${src}")`); el.classList.add("has-img"); };
+    im.src = src;
+  }
+
+  const burger = document.getElementById("burger"), menu = document.getElementById("menu");
+  const setMenu = o => {
+    menu.classList.toggle("open", o);
+    document.documentElement.classList.toggle("lock", o);
+    burger.setAttribute("aria-expanded", o);
+    burger.setAttribute("aria-label", o ? "Cerrar menú" : "Abrir menú");
+  };
+  burger.addEventListener("click", e => { e.stopPropagation(); setMenu(!menu.classList.contains("open")); });
+  menu.addEventListener("click", e => {
+    const a = e.target.closest("a");
+    if (!a) { if (e.target === menu) setMenu(false); return; }
+    const id = a.getAttribute("href");
+    if (id && id.startsWith("#")) {
+      e.preventDefault();
+      setMenu(false);
+      const t = document.querySelector(id);
+      requestAnimationFrame(() => requestAnimationFrame(() => t && t.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"})));
+    } else setMenu(false);
+  });
+  addEventListener("keydown", e => { if (e.key === "Escape" && menu.classList.contains("open")) { setMenu(false); burger.focus(); } });
+  matchMedia("(min-width: 961px)").addEventListener("change", m => { if (m.matches) setMenu(false); });
+
+  const nav = document.getElementById("top");
+  const onScroll = () => nav.classList.toggle("scrolled", scrollY > 8);
+  addEventListener("scroll", onScroll, {passive:true}); onScroll();
+  const bar = document.getElementById("wabar"), hero = document.getElementById("inicio"), contact = document.getElementById("contacto");
+  const barTick = () => { const h = hero.getBoundingClientRect().bottom, c = contact.getBoundingClientRect(); bar.classList.toggle("show", h < 0 && !(c.top < innerHeight && c.bottom > 0)); };
+  addEventListener("scroll", barTick, {passive:true}); barTick();
+  document.getElementById("yr").textContent = new Date().getFullYear();
+}
+</script>
+</body>
+</html>
